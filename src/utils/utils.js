@@ -5,7 +5,7 @@
 const moment = require('moment');
 const AM = 1; //上午
 const PM = 0; //下午
-
+const $ = require('zepto');
 // 工具箱
 const utils = {
   /**
@@ -162,7 +162,50 @@ const utils = {
       AMs: AMs,
       PMs: PMs
     }
-  }
+  },
+
+  /**
+   * 请求服务，统一封装，用于之后做一些统一处理
+   * @param  {string}   serviceName 服务名称
+   * @param  {Object}   params      参数
+   * @param  {Function} cb(error, model, resp, textStatus, jqXHR/XMLHttpRequest, errorThrown)
+   * @param  {string}   serviceType 服务前缀， 默认zuche-intf-rent
+   * @param  {string}   method      默认POST
+   * @param  {object}   ext         扩展参数
+   */
+  ajax(url, params, cb, serviceType, method, ext) {
+    params = JSON.stringify($.extend({}, params, {
+      _client_version_no: '1.0.0'
+    }));
+    let opts = {
+      url: url,
+      type: method || 'POST',
+      dataType: 'json',
+      jsonp: false, // JQuery有bug，如果Content-Type是application/json，表单里有两个连续的??，就会引起bug， jquery就会把请求结果当成jsonp，用script方式来执行结果
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      data: params,
+      success: (resp, textStatus, jqXHR) => {
+        cb && cb(null, resp, textStatus, jqXHR);
+        // if (resp.responseCode === REPONSE_CODE_SUCCESS) {
+        //
+        // } else {
+        //   cb && cb((resp.responseMsg != '' ? resp.responseMsg : (resp.responseCode + '#' + resp.responseMsg)), undefined, resp, textStatus, jqXHR);
+        // }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(errorThrown)
+        cb && cb(textStatus || '请求失败', undefined, null, textStatus, XMLHttpRequest, errorThrown);
+      }
+    };
+
+    if (typeof ext === 'object') {
+      $.extend(opts, ext);
+    }
+
+    $.ajax(opts);
+  },
 };
 
-module.exports = utils;
+export default utils;

@@ -1,0 +1,22 @@
+{
+  "options": [
+    {
+      "aId": "o0",
+      "belong": "area",
+      "name": "区域",
+      "isActive": false
+    },
+    {
+      "aId": "o1",
+      "belong": "title",
+      "name": "医生职称",
+      "isActive": false
+    },
+    {
+      "aId": "o2",
+      "belong": "time",
+      "name": "预约时间",
+      "isActive": false
+    }
+  ]
+}

@@ -30,14 +30,12 @@
       </div>
     </div>
 
-
-    <div v-show="subject === 't1'" class="row list">
-      <h1>我是百科咨询</h1>
-    </div>
+    <Wiki v-show="subject === 't1'"></Wiki>
 
     <div v-show="subject === 't2'" class="row list">
       <h1>我是医患问答</h1>
     </div>
+
     <Doctor v-show="subject === 't3'" :doctors="doctors"></Doctor>
 
     <div v-show="subject === 't4'" class="row list">
@@ -49,12 +47,14 @@
 <script>
   import Tab from '../commons/components/Tab.vue';
   import Doctor from './search/Doctor.vue';
+  import Wiki from './search/Wiki.vue';
 
   export default {
     name: 'hello',
     components: {
       Tab,
       Doctor,
+      Wiki
     },
     data () {
       return {

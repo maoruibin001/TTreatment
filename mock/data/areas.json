@@ -1,0 +1,52 @@
+{
+  "areas": [
+    {
+      "aId": "a0",
+      "belong": "area",
+      "name": "不限区域",
+      "isActive": false
+    },
+    {
+      "aId": "a1",
+      "belong": "area",
+      "name": "罗湖",
+      "isActive": false
+    },
+    {
+      "aId": "a2",
+      "belong": "area",
+      "name": "福田",
+      "isActive": false
+    },
+    {
+      "aId": "a3",
+      "belong": "area",
+      "name": "南山",
+      "isActive": false
+    },
+    {
+      "aId": "a4",
+      "belong": "area",
+      "name": "保安",
+      "isActive": false
+    },
+    {
+      "aId": "a5",
+      "belong": "area",
+      "name": "龙华",
+      "isActive": false
+    },
+    {
+      "aId": "a6",
+      "belong": "area",
+      "name": "盐田",
+      "isActive": false
+    },
+    {
+      "aId": "a7",
+      "belong": "area",
+      "name": "光明",
+      "isActive": false
+    }
+  ]
+}

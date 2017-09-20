@@ -17,7 +17,9 @@
       <div class="col-xs-12 gap"></div>
       <div class="col-xs-5 text-left"><h4 class="disease">选择病种</h4></div>
       <!--<div class="col-xs-4"></div>-->
-      <div class="col-xs-7" @click="active=true"><div class="img-box">{{activeDisease.name}} <img class="img" src="../assets/arrow-down.jpg" alt=""></div></div>
+      <div class="col-xs-7" @click="active=true">
+        <div class="img-box">{{activeDisease.name}} <img class="img" src="../assets/arrow-down.jpg" alt=""></div>
+      </div>
       <div class="col-xs-12 gap"></div>
     </div>
 
@@ -44,7 +46,9 @@
 
 
     <div class="slidedown" v-show="active">
-      <div :class="disease.isActive ? 'active-item' : ''" @click="chooseDisease(disease)" class="col-xs-12 slide-item text-left" v-for="disease in diseases">{{disease.name}}</div>
+      <div :class="disease.isActive ? 'active-item' : ''" @click="chooseDisease(disease)"
+           class="col-xs-12 slide-item text-left" v-for="disease in diseases">{{disease.name}}
+      </div>
     </div>
 
 
@@ -55,30 +59,42 @@
 </template>
 
 <script>
+  import utils from '../utils/utils';
   export default {
     name: 'Consult',
     components: {},
     created() {
       this.doctor = this.$route.params.doctor;
+      this.requestData();
     },
     data () {
       return {
         doctor: {},
-        diseases: [
-          {dId: 'd0', name: '心脑血管', isActive: false},
-          {dId: 'd1', name: '心内科', isActive: false},
-          {dId: 'd2', name: '神经外科', isActive: false},
-          {dId: 'd3', name: '神经内科', isActive: false},
-          {dId: 'd4', name: '妇科', isActive: false},
-          {dId: 'd5', name: '便秘', isActive: false},
-          {dId: 'd6', name: '其他儿科常见问题', isActive: false},
-        ],
+        diseases: [],
         active: false,
         activeDisease: {},
 
       }
     },
     methods: {
+      //      请求mock数据
+      requestData() {
+        utils.ajax('http://localhost:8080/mock/diseases', {}, (error, data) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+          this.diseases = data.diseases;
+        });
+
+        utils.ajax('http://localhost:8080/mock/options', {}, (error, data) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+          this.options = data.options;
+        });
+      },
 //      返回
       back() {
         this.$router.replace('/')
@@ -86,7 +102,9 @@
 
 //      选择某种疾病
       chooseDisease(disease) {
-        this.diseases.forEach(e => {e.isActive = false});
+        this.diseases.forEach(e => {
+          e.isActive = false
+        });
         disease.isActive = true;
         this.activeDisease = disease;
         this.closePop();
@@ -144,7 +162,7 @@
     position: relative;
     background: none;
     z-index: 9;
-    border:none;
+    border: none;
     width: 100%;
     outline: none;
   }
@@ -163,14 +181,16 @@
     right: 1em;
     bottom: .5em;
   }
+
   .gray {
-    color:#CACACA;
+    color: #CACACA;
   }
 
   .img-box {
     float: right;
     margin-top: .5em;
   }
+
   .popup-wrapper {
     position: absolute;
     top: 0;
@@ -206,7 +226,7 @@
   }
 
   .btns-box {
-    position:fixed;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;

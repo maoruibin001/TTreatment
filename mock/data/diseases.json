@@ -1,0 +1,39 @@
+{
+  "diseases": [
+    {
+      "dId": "d0",
+      "name": "心脑血管",
+      "isActive": false
+    },
+    {
+      "dId": "d1",
+      "name": "心内科",
+      "isActive": false
+    },
+    {
+      "dId": "d2",
+      "name": "神经外科",
+      "isActive": false
+    },
+    {
+      "dId": "d3",
+      "name": "神经内科",
+      "isActive": false
+    },
+    {
+      "dId": "d4",
+      "name": "妇科",
+      "isActive": false
+    },
+    {
+      "dId": "d5",
+      "name": "便秘",
+      "isActive": false
+    },
+    {
+      "dId": "d6",
+      "name": "其他儿科常见问题",
+      "isActive": false
+    }
+  ]
+}

@@ -84,15 +84,14 @@
 </template>
 
 <script>
-  import {createDateMap} from '../../utils/utils';
+  import utils from '../../utils/utils';
 
   export default {
     name: 'Doctor',
     props: ['doctors'],
     created() {
-      this.dates = createDateMap(7);
-
-      console.log(this.dates);
+      this.dates = utils.createDateMap(7);
+      this.requestData();
     },
     data () {
       return {
@@ -101,32 +100,42 @@
           name: '',
           isActive: false
         },
-        options: [
-          {aId: 'o0', belong: 'area', name: '区域', isActive: false},
-          {aId: 'o1', belong: 'title', name: '医生职称', isActive: false},
-          {aId: 'o2', belong: 'time', name: '预约时间', isActive: false},
-        ],
-        areas: [
-          {aId: 'a0', belong: 'area', name: '不限区域', isActive: false},
-          {aId: 'a1', belong: 'area', name: '罗湖', isActive: false},
-          {aId: 'a2', belong: 'area', name: '福田', isActive: false},
-          {aId: 'a3', belong: 'area', name: '南山', isActive: false},
-          {aId: 'a4', belong: 'area', name: '保安', isActive: false},
-          {aId: 'a5', belong: 'area', name: '龙华', isActive: false},
-          {aId: 'a6', belong: 'area', name: '盐田', isActive: false},
-          {aId: 'a7', belong: 'area', name: '光明', isActive: false},
-        ],
-        titles: [
-          {aId: 't0', belong: 'title', name: '不限职称', isActive: false},
-          {aId: 't1', belong: 'title', name: '主任', isActive: false},
-          {aId: 't2', belong: 'title', name: '副主任', isActive: false},
-        ],
+        options: [],
+        areas: [],
+        titles: [],
         dates: [],
       }
     },
 
     methods: {
-//      过滤
+//      请求mock数据
+      requestData() {
+        utils.ajax('http://localhost:8080/mock/titles', {}, (error, data) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+          this.titles = data.titles;
+        });
+
+        utils.ajax('http://localhost:8080/mock/options', {}, (error, data) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+          this.options = data.options;
+        });
+
+        utils.ajax('http://localhost:8080/mock/areas', {}, (error, data) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+          this.areas = data.areas;
+        });
+      },
+
+      //      过滤
       filter() {
         alert('filter');
       },
