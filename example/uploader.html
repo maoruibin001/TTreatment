@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../src/commons/css/LUploader.css">
+</head>
+<body>
+<div class="LUploader" id="demo1">
+  <div class="LUploader-container">
+    <input id="d2" data-LUploader='demo1' data-form-file='basestr' data-upload-type='front' type="file" />
+    <ul class="LUploader-list"></ul>
+  </div>
+  <div>
+    <div class="icon icon-camera font20"></div>
+    <p>单击上传</p>
+  </div>
+</div>
+
+<script src="../src/commons/js/LUploader.min.js"></script>
+
+<script>
+  new LUploader(document.querySelector('#d2'), {
+    url: '',//post请求地址
+    multiple: false,//是否一次上传多个文件 默认false
+    maxsize: 102400,//忽略压缩操作的文件体积上限 默认100kb
+    accept: 'image/*',//可上传的图片类型
+    quality: 0.1,//压缩比 默认0.1  范围0.1-1.0 越小压缩率越大
+    showsize:false//是否显示原始文件大小 默认false
+  });
+</script>
+</body>
+</html>
